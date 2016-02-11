@@ -1,7 +1,7 @@
 'use strict';
 
 $(function(){
-	var width = 300;
+	var width = 200;
 	var height = 0;
 	var canvas = document.getElementById('canvas');
 	var context = canvas.getContext('2d')
@@ -48,27 +48,51 @@ $(function(){
 
 	// Show video from webcam...
 	$video.on('canplay', function(ev){
+		console.log('Canplay video!');
 		if (!streaming) {
-			height = video.videoHeight / (video.videoWidth/width);
+			// height = video.videoHeight / (video.videoWidth/width);
 
-			// Firefox currently has a bug where the height can't be read from
-			// the video, so we will make assumptions if this happens.
+			// // Firefox currently has a bug where the height can't be read from
+			// // the video, so we will make assumptions if this happens.
 
-			if (isNaN(height)) {
-				height = width / (4/3);
-			}
+			// if (isNaN(height)) {
+			// 	height = width / (4/3);
+			// }
 
-			video.setAttribute('width', width);
-			video.setAttribute('height', height);
-			canvas.setAttribute('width', width);
-			canvas.setAttribute('height', height);
+			// video.setAttribute('width', width);
+			// video.setAttribute('height', height);
+			// canvas.setAttribute('width', width);
+			// canvas.setAttribute('height', height);
 			streaming = true;
 		}
 	}, false);
 
 
 	// 'Capture' button event handler
-	
+	$capture.click(function(){
+		console.log('Taking photo...');
+
+		var width = $video.width();
+		var height = $video.height();
+		console.log('Image dimensions: '+ width + 'x' + height);
+
+		// Draw image on video to canvas
+		context.drawImage(videoEl, 0, 0, width, height);
+
+		// ?? TODO: figure this out
+		var data = canvas.toDataURL('image/png');
+		// console.log('Data from photo:');
+		// console.log(data);
+
+		// Create new <img> element
+		var newImg = $("<img class='photo' src='' alt='webcam image'>");
+		newImg.attr('src', data);
+
+		console.log('New image:');
+		console.log(newImg);
+		// insert new image into photo-roll
+		$roll.append(newImg);
+	});
 
 
 });
