@@ -1,9 +1,10 @@
 'use strict';
 
 $(function(){
-	var width = 200;
-	var height = 0;
+	var height;
+	var width;
 	var canvas = document.getElementById('canvas');
+	var $canvas = $('#canvas');
 	var context = canvas.getContext('2d')
 	var $video = $('#capture-video');
 	var videoEl = document.getElementById('capture-video');
@@ -20,6 +21,29 @@ $(function(){
 	console.log('getMedia: ');
 	console.log(navigator.getMedia);
 
+
+	// Show video from webcam...
+	// $video.on('canplay', function(ev){
+	// 	console.log('Canplay video!');
+	// 	if (!streaming) {
+	// 		// height = video.videoHeight / (video.videoWidth/width);
+
+	// 		// // Firefox currently has a bug where the height can't be read from
+	// 		// // the video, so we will make assumptions if this happens.
+
+	// 		// if (isNaN(height)) {
+	// 		// 	height = width / (4/3);
+	// 		// }
+
+	// 		// video.setAttribute('width', width);
+	// 		// video.setAttribute('height', height);
+	// 		// canvas.setAttribute('width', width);
+	// 		// canvas.setAttribute('height', height);
+	// 		streaming = true;
+	// 	}
+	// }, false);
+
+
 	// Get webcam...
 	navigator.getMedia(
 		// Call webcam, not micophone
@@ -34,6 +58,14 @@ $(function(){
 			} else {
 				var vendorURL = window.URL || window.webkitURL;
 				videoEl.src = vendorURL.createObjectURL(stream);
+				// // Get height and width for canvas element
+				height = $video.height();
+				width = $video.width();
+				console.log('Video dimensions: '+ width + 'x' + height);
+
+				$video.attr({width: width, height: height});
+				// $canvas.attr({width: width, height: height});
+
 			}
 
 			videoEl.play();
@@ -46,43 +78,21 @@ $(function(){
 	);
 
 
-	// Show video from webcam...
-	$video.on('canplay', function(ev){
-		console.log('Canplay video!');
-		if (!streaming) {
-			// height = video.videoHeight / (video.videoWidth/width);
-
-			// // Firefox currently has a bug where the height can't be read from
-			// // the video, so we will make assumptions if this happens.
-
-			// if (isNaN(height)) {
-			// 	height = width / (4/3);
-			// }
-
-			// video.setAttribute('width', width);
-			// video.setAttribute('height', height);
-			// canvas.setAttribute('width', width);
-			// canvas.setAttribute('height', height);
-			streaming = true;
-		}
-	}, false);
-
-
 	// 'Capture' button event handler
 	$capture.click(function(){
 		console.log('Taking photo...');
 
-		var width = $video.width();
-		var height = $video.height();
-		console.log('Image dimensions: '+ width + 'x' + height);
+		// Get height and width for canvas element
+		height = $video.height();
+		width = $video.width();
+		console.log('Video dimensions: '+ width + 'x' + height);
+
+		$video.attr({width: width, height: height});
 
 		// Draw image on video to canvas
 		context.drawImage(videoEl, 0, 0, width, height);
 
-		// ?? TODO: figure this out
 		var data = canvas.toDataURL('image/png');
-		// console.log('Data from photo:');
-		// console.log(data);
 
 		// Create new <img> element
 		var newImg = $("<img class='photo' src='' alt='webcam image'>");

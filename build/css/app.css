@@ -40,21 +40,23 @@ main #frame {
 }
 main #frame #capture-video {
   display: inline-block;
-  max-height: 100%;
+  height: 100%;
+  width: auto;
 }
 main #frame #canvas {
   height: 100%;
+  width: auto;
   background-color: #e5e5e5;
   display: inline-block;
 }
 main .capture {
   display: inline-block;
-  padding: 1vh 3vh;
+  padding: 2vh 3vh;
   margin-bottom: 5vh;
   background-color: #333333;
   font-weight: 700;
   font-size: 1em;
-  font-size: 8vh;
+  font-size: 6vh;
 }
 main #photo-stream {
   position: fixed;
@@ -63,12 +65,13 @@ main #photo-stream {
   width: 100%;
   text-align: center;
   padding: 5vh;
+  min-height: 25vh;
   background-color: #333333;
 }
 main #photo-stream .photo {
   display: inline-block;
-  height: 20vh;
-  width: 15vw;
+  height: 15vh;
+  width: auto;
   margin-right: 3vh;
   background-color: #FAFAFA;
 }
