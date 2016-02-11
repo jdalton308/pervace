@@ -5,6 +5,7 @@ var less = require('gulp-less');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
+var server = require('gulp-server-livereload');
 
 var styleFiles = [
         './src/less/main.less'
@@ -34,7 +35,7 @@ gulp.task('styles', function() {
 gulp.task('scripts', function(){
 	gulp.src(jsFiles)
 		.pipe(concat('app.js'))
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(gulp.dest('./build/js/'))
 		.on('error', gutil.log);
 });
@@ -44,6 +45,13 @@ gulp.task('watch', function(){
     gulp.watch(['./src/js/**/*.js'], ['scripts']);
 });
 
+gulp.task('server', function(){
+	gulp.src('build/')
+		.pipe(server({
+			livereload: true
+		}));
+});
+
 gulp.task('build', ['html', 'styles', 'scripts'])
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build', 'server', 'watch']);
