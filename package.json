@@ -1,0 +1,28 @@
+{
+  "name": "pervace",
+  "version": "1.0.0",
+  "description": "web app for a world atlas of facial expressiosn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/jdalton308/joedalton.git"
+  },
+  "author": "Joe Dalton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/jdalton308/joedalton/issues"
+  },
+  "homepage": "https://gitlab.com/jdalton308/joedalton#README",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^1.3.0",
+    "gulp-less": "^3.0.3",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "jquery": "^2.2.0"
+  }
+}
