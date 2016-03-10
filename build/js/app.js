@@ -9905,7 +9905,7 @@ $(function(){
 
 		// If cannot use the camera...
 		function(err) {
-			console.error("An error occured! " + err);
+			console.error("Error retrieving camera: " + err);
 		}
 	);
 
@@ -9919,7 +9919,7 @@ $(function(){
 		width = $video.width();
 		console.log('Video dimensions: '+ width + 'x' + height);
 
-		$video.attr({width: width, height: height});
+		$canvas.attr({width: width, height: height});
 
 		// Draw image on video to canvas
 		context.drawImage(videoEl, 0, 0, width, height);
